@@ -17,15 +17,14 @@ class DashboardView(TemplateView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            action = request.POST['action']
-            if action == 'get_graph_online':
+            action = request.POST['action']            if action == 'get_graph_online':
                 login = request.POST['login']
                 locationName = request.POST['location']
-                user = User.objects.get(login=login)
-                location = Location.objects.get(name=locationName)
-                sensor = get_sensor('temperature', user, location)
-                data = {'y': get_last_measure(sensor)}
-                #data = {'y': 1}
+                user = get_or_create_user(login)
+                location = get_or_create_location(locationName)
+                sensor = get_or_create_sensor('temperatura', user, location)
+                last = SensorData.objects.filter(sensor=sensor).order_by('-dateTime').first()
+                data = {'y': last.value if last else 0}
 
                 print(data)
             else:
