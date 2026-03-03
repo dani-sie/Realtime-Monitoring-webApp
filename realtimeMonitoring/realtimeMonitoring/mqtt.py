@@ -47,7 +47,10 @@ def evaluate_temperature_event(client, sensor, user):
 
 def on_message(client, userdata, message):
     payload = message.payload.decode("utf-8")
-    payload_json = json.loads(payload)
+    try:
+        payload_json = json.loads(payload)
+    except json.JSONDecodeError:
+        return
     topic_parts = message.topic.split("/")
 
     if len(topic_parts) < 3:
@@ -60,7 +63,10 @@ def on_message(client, userdata, message):
     user_obj = get_or_create_user(user)
     location_obj = get_or_create_location(location)
     sensor_obj = get_or_create_sensor(variable, user_obj, location_obj)
-    create_sensorData(sensor_obj, payload_json["value"])
+    value = payload_json.get("value")
+    if value is None:
+        return
+    create_sensorData(sensor_obj, value)
 
     if variable == "temperatura":
         evaluate_temperature_event(client, sensor_obj, user)
@@ -78,3 +84,4 @@ if MQTT_CA_CERT:
 
 client.connect(MQTT_HOST, MQTT_PORT, 60)
 client.subscribe(MQTT_SUB_TOPIC)
+
