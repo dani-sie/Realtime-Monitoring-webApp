@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <script src="{% static 'lib/highcharts-8.1.2/highcharts.js' %}"></script>
-    <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js' %}"></script>
-    <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js' %}"></script>
-    <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js' %}"></script>
+    <script src="https://code.highcharts.com/8.1.2/highcharts.js"></script>
+    <script src="https://code.highcharts.com/8.1.2/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/8.1.2/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/8.1.2/modules/accessibility.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -22,7 +22,7 @@
                     <div class="col">
                       <input type="text" class="form-control" placeholder="User" id="login">
                     </div>
-                    <div class="col"> 
+                    <div class="col">
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                             }).always(function (data) {
 
                             });
-                        }, 1000); 
+                        }, 1000);
                     }
                 }
             },
