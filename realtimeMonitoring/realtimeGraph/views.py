@@ -17,7 +17,8 @@ class DashboardView(TemplateView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            action = request.POST['action']            if action == 'get_graph_online':
+            action = request.POST['action']
+            if action == 'get_graph_online':
                 login = request.POST['login']
                 locationName = request.POST['location']
                 user = get_or_create_user(login)
@@ -75,3 +76,4 @@ def get_last_measure(sensor):
 
 class HistoricalView(TemplateView):
     template_name = 'historical.html'
+
