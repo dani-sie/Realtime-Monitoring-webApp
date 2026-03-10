@@ -77,3 +77,13 @@ def get_last_measure(sensor):
 class HistoricalView(TemplateView):
     template_name = 'historical.html'
 
+
+class GrafanaView(TemplateView):
+    template_name = 'grafana.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from django.conf import settings
+        context["grafana_url"] = settings.GRAFANA_URL
+        return context
+

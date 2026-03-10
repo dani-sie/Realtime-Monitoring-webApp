@@ -130,6 +130,9 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
+# Grafana embed URL (override via env var)
+GRAFANA_URL = os.getenv("GRAFANA_URL", "http://localhost:3000")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
